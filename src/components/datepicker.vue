@@ -1,6 +1,7 @@
 <!--
 * @DatePicker 日期选择组件
 * @author: Jeff Guo
+* @github: https://github.com/megeee/DataPicker
 -->
 <template>
     <div class="datetime-picker" :style="{ width:width }">
@@ -69,7 +70,6 @@ export default {
         this.getDays();
     },
     mounted () {
-        //这里应该在日历显示的时候加事件，隐藏的时候移除事件
         document.addEventListener('click', (e) => {
             if(this.show){
                 if (!this.$el.contains(e.target)) this.show = false
@@ -95,7 +95,6 @@ export default {
             ];
             let couFirstDay = nowMonthFirstDay.getDay(); //当月的第一天是周内
 
-            //当月前面要显示的日期
             let startDays = (()=>{
                 let tempArr = [];
                 let length = couFirstDay === 0 ? 7 : couFirstDay;                
@@ -108,7 +107,6 @@ export default {
                 return tempArr
             })();
 
-            //当月要显示的日期
             let nowDays = (()=>{
                 let tempArr = [];
                 let length = nowMonthLastDay.getDate();
@@ -121,7 +119,6 @@ export default {
                 return tempArr;
             })();
 
-            //当月后面要显示的日期
             let endDays = (()=>{
                 let tempArr = [];
                 let length = 42 - nowMonthLastDay.getDate() - startDays.length;

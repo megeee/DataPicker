@@ -1,19 +1,14 @@
 <template>
-
-    <div class="demo_block">
-        <h2>基本用法：</h2>
-        <div class="source">
-            <lz-datepicker
-                @change="pickDate"
-                placeholder="请选择日期">
-            </lz-datepicker>
-        </div>
-    </div>
-    
+    <div class="demo">
+        <datepicker
+            @change="pickDate"
+            placeholder="请选择日期">
+        </datepicker>
+    </div>    
 </template>
 
-<script type="text/ecmascript-6">
-import lzDatepicker from "./datepicker"
+<script>
+import datepicker from "./components/datepicker"
     export default {
         data () {
             return {
@@ -26,7 +21,17 @@ import lzDatepicker from "./datepicker"
             }
         },
         components: {
-            lzDatepicker
+            datepicker
         }
     }
 </script>
+<style>
+    body{
+        margin:0;
+        padding:0;
+        font-family:Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;;
+    }
+    .demo{
+        margin:20px;
+    }
+</style>
