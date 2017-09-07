@@ -2,6 +2,7 @@
     <div class="demo">
         <datepicker
             @change="pickDate"
+            default-value="2017-05-05"
             placeholder="请选择日期">
         </datepicker>
     </div>    

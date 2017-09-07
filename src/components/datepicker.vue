@@ -63,10 +63,25 @@ export default {
         }
     },
     props: {
-        width: { type: String, default: '242px' },
-        placeholder: { type:String, default: '' }
+        width: { 
+            type: String, 
+            default: '242px' 
+        },
+        placeholder: { 
+            type:String, 
+            default: '' 
+        },
+        defaultValue: {
+            type: String,
+            default: ''
+        },
+
     },
     created () {
+        if(this.defaultValue){
+            this.value = this.defaultValue;
+            this.now = new Date(this.defaultValue);
+        }
         this.getDays();
     },
     mounted () {
