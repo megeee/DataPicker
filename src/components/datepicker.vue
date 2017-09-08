@@ -19,12 +19,12 @@
                     <tr class="date-head">
                         <th colspan="4">
                             <span class="btn-prev" @click="setYear('-')">&lt;</span>
-                            <span class="show-month">{{ format(now,"yyyy") }}</span>
+                            <span class="show-month">{{ formatDate(now,"yyyy") }}</span>
                             <span class="btn-next" @click="setYear('+')">&gt;</span>
                         </th>
                         <th colspan="3">
                             <span class="btn-prev" @click="setMonth('-')">&lt;</span>
-                            <span class="show-month">{{ format(now,"MM") }}</span>
+                            <span class="show-month">{{ formatDate(now,"MM") }}</span>
                             <span class="btn-next" @click="setMonth('+')">&gt;</span>
                         </th>
                     </tr>
@@ -38,11 +38,10 @@
                         <td v-for="j in 7"
                         :date='days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].day'
                         :style="days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].now ? '':'color:#ccc'"
-                        :class="days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].day == format(!value ? now :value) ? 'active':''"
+                        :class="days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].day == formatDate(!value ? now :value) ? 'active':''"
                         @click="pickDate(days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].day)"
                         >
                             {{ days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].day.substring(8,10) }}
-
                         </td>
                     </tr>
                 </tbody>
@@ -75,7 +74,11 @@ export default {
             type: String,
             default: ''
         },
-
+        //可以是： 'yyyy-MM-dd, yyyy.MM.dd, yyyy/MM/dd'
+        format: {
+            type:String,
+            default: 'yyyy-MM-dd'
+        }
     },
     created () {
         if(this.defaultValue){
@@ -116,7 +119,7 @@ export default {
                 for(let i=length; i>0; i--){
                     tempArr.push({
                         now:false,
-                        day:this.format(new Date(this.now.getFullYear(),this.now.getMonth()-1,preMonthLastDay.getDate()-i+1))
+                        day:this.formatDate(new Date(this.now.getFullYear(),this.now.getMonth()-1,preMonthLastDay.getDate()-i+1))
                     })
                 }
                 return tempArr
@@ -128,7 +131,7 @@ export default {
                 for(let i=0; i<length; i++){
                     tempArr.push({
                         now:true,
-                        day:this.format(new Date(this.now.getFullYear(),this.now.getMonth(),i+1))
+                        day:this.formatDate(new Date(this.now.getFullYear(),this.now.getMonth(),i+1))
                     })
                 }
                 return tempArr;
@@ -140,7 +143,7 @@ export default {
                 for(let i=0; i<length; i++){
                     tempArr.push({
                         now:false,
-                        day: this.format(new Date(this.now.getFullYear(),this.now.getMonth()+1,i+1))
+                        day: this.formatDate(new Date(this.now.getFullYear(),this.now.getMonth()+1,i+1))
                     })
                 }
                 return tempArr;
@@ -160,11 +163,11 @@ export default {
             this.now = new Date(this.now.getFullYear()+type,this.now.getMonth());
             this.getDays();
         },
-        format (date,format) {
+        formatDate  (date,format) {
             if (typeof date === 'string') {
                 date = new Date(Date.parse(date.replace(/-\/./g, "/")));
             }
-            let newFormat = format || 'yyyy-MM-dd'
+            let newFormat = format || this.format
             , o = {
                 "M+" : date.getMonth()+1,                 //月份
                 "d+" : date.getDate(),                    //日
