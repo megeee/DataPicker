@@ -3,7 +3,7 @@
         <datepicker
             @change="pickDate"
             default-value="2017-05-05"
-            format="yyyy/MM/dd"
+            format="yyyy-MM-dd"
             placeholder="请选择日期">
         </datepicker>
     </div>    
