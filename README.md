@@ -10,6 +10,7 @@
 |:----:|:-----:|:--------:|:-----:|:-----:|
 |default-value|可选，默认显示的时间|String|可被new Date()解析|-|
 |width|组件宽度|String|-|242px|
+|format|输出日期格式|String|'yyyy-MM-dd, yyyy.MM.dd, yyyy/MM/dd'|yyyy-MM-dd|
 
 ### 事件
 |事件名	  | 说明  | 回调参数 |
