@@ -4,6 +4,29 @@
 
 ![demo](./demo.gif)
 
+### 代码
+
+```html
+    <datepicker
+        @change="pickDate"
+        default-value="2017-05-05"
+        format="yyyy-MM-dd"
+        placeholder="请选择日期">
+    </datepicker>
+```
+``` javascript
+    export default {
+        methods: {
+            pickDate (v) {
+                console.log(v)
+            }
+        },
+        components: {
+            datepicker
+        }
+    }
+```
+
 ### 参数
 
 |参数	  | 说明  | 类型	 | 可选值	| 默认值 |
