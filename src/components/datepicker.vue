@@ -13,40 +13,42 @@
             @click="show = !show"
             :placeholder="placeholder"
         >
-        <div class="picker-wrap" v-show="show">
-            <table class="date-picker">
-                <thead>
-                    <tr class="date-head">
-                        <th colspan="4">
-                            <span class="btn-prev" @click="setYear('-')">&lt;</span>
-                            <span class="show-month">{{ formatDate(now,"yyyy") }}</span>
-                            <span class="btn-next" @click="setYear('+')">&gt;</span>
-                        </th>
-                        <th colspan="3">
-                            <span class="btn-prev" @click="setMonth('-')">&lt;</span>
-                            <span class="show-month">{{ formatDate(now,"MM") }}</span>
-                            <span class="btn-next" @click="setMonth('+')">&gt;</span>
-                        </th>
-                    </tr>
-                    <tr class="date-days" style="border-bottom:1px solid #f5f5f5">
-                        <td v-for="week in weeks"> {{ week }} </td>
-                    </tr>
-                </thead>
+        <transition name="fade">
+            <div class="picker-wrap" v-show="show">
+                <table class="date-picker">
+                    <thead>
+                        <tr class="date-head">
+                            <th colspan="4">
+                                <span class="btn-prev" @click="setYear('-')">&lt;</span>
+                                <span class="show-month">{{ formatDate(now,"yyyy") }}</span>
+                                <span class="btn-next" @click="setYear('+')">&gt;</span>
+                            </th>
+                            <th colspan="3">
+                                <span class="btn-prev" @click="setMonth('-')">&lt;</span>
+                                <span class="show-month">{{ formatDate(now,"MM") }}</span>
+                                <span class="btn-next" @click="setMonth('+')">&gt;</span>
+                            </th>
+                        </tr>
+                        <tr class="date-days" style="border-bottom:1px solid #f5f5f5">
+                            <td v-for="week in weeks"> {{ week }} </td>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                    <tr v-for="i in 6">
-                        <td v-for="j in 7"
-                        :date='days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].day'
-                        :style="days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].now ? '':'color:#ccc'"
-                        :class="days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].day == formatDate(!value ? now :value) ? 'active':''"
-                        @click="pickDate(days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].day)"
-                        >
-                            {{ days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].day.substring(8,10) }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>            
-        </div>
+                    <tbody>
+                        <tr v-for="i in 6">
+                            <td v-for="j in 7"
+                            :date='days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].day'
+                            :style="days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].now ? '':'color:#ccc'"
+                            :class="days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].day == formatDate(!value ? now :value) ? 'active':''"
+                            @click="pickDate(days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].day)"
+                            >
+                                {{ days[(i == 1 ? j-1 : (i-1) * 7 + j-1)].day.substring(8,10) }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>            
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -275,4 +277,8 @@ highlight = #3bb4f2
             vertical-align middle
         .btn-prev:hover,.btn-next:hover
             background rgba(16, 160, 234, 0.5)
+.fade-enter-active,.fade-leave-active
+    transition opacity .3s
+.fade-enter,.fade-leave-to
+    opacity 0
 </style>
