@@ -82,6 +82,13 @@ export default {
             default: 'yyyy-MM-dd'
         }
     },
+    watch:{
+        //监控初始值变化
+        defaultValue (val) {
+            this.value = this.defaultValue;
+            this.now = new Date(this.defaultValue);
+        }
+    },
     created () {
         if(this.defaultValue){
             this.value = this.defaultValue;
